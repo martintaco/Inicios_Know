@@ -1032,16 +1032,15 @@ b.CodProductoGenericoI,c.codtipooferta;
 	INTO TEMPORARY TABLE temp_base3
 	FROM temp_base2
 	ORDER by codpais,aniocampana,desmarca,descategoria;
-	
+
 	/*Se elimina el contenido del repositorio para insertar la nueva data generada*/	
 	DELETE FROM dom_forecast.forecast_input_qas WHERE codpais IS NOT NULL;
 	
 	INSERT INTO dom_forecast.forecast_input_qas  
 	select * FROM temp_base3;
-	dom_forecast.forecast_parameters
-	/*Aquí están los comandos para visualizar la data y contar el numero de resgistros*/
-	SELECT * from temp_base3 where codpais = 'CL'
-	select DISTINCT aniocampana,count(aniocampana) from dom_forecast.forecast_input_qas where codpais = 'PR' group by aniocampana order by 1;
-	select DISTINCT count(aniocampana),count from dom_forecast.forecast_input_qas where codpais = 'PR' group by aniocampana order by 1;
 	
-	select DISTINCT aniocampana from temp_base order by 1 
+	/*Aquí están los comandos para visualizar la data y contar el numero de resgistros*/
+	--DELETE from dom_forecast.forecast_input_qas  where codpais = 'PR' and aniocampana = '201810'
+	--select DISTINCT aniocampana,count(aniocampana) from dom_forecast.forecast_input_qas where codpais = 'PR' group by aniocampana order by 1;
+	--select DISTINCT count(aniocampana),count from dom_forecast.forecast_input_qas where codpais = 'PR' group by aniocampana order by 1;
+	--select DISTINCT aniocampana,count(aniocampana) from fnc_analitico.dwh_fvtaproebecam where codpais = 'PR'group by aniocampana order by 1 
